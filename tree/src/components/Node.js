@@ -29,7 +29,7 @@ class Node extends Component {
         <div>
           <div>
             <span className="text-item">
-              {this.props.item.name}{this.props.item.childs.length > 0 ? '(' + this.props.item.childs.length + ')' : ''}
+              {this.props.item.name}{this.props.item.childs.length > 0 ? ' (' + this.props.item.childs.length + ')' : ''}
             </span>
             <i onClick={() => this.getInput()} className="fa fa-plus"></i>
             <i onClick={() => this.props.removeNode(this.props.item.name)} className="fa fa-times"></i>
