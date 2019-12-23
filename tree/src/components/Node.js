@@ -12,6 +12,7 @@ class Node extends Component {
           <p>
             {this.props.item.name}
             <i onClick={() => this.props.addNode(this.props.item.name)} className="fa fa-plus"></i>
+            <i onClick={() => this.props.removeNode(this.props.item.name)} className="fa fa-times"></i>
           </p>
           {this.props.children}
         </div>

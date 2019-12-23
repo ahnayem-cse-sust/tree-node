@@ -7,6 +7,7 @@ class Tree extends Component {
     constructor(props) {
         super(props);
         this.addNode = this.addNode.bind(this);
+        this.removeNode = this.removeNode.bind(this);
         this.state = {
             dataArray: [],
             tree: {},
@@ -32,6 +33,9 @@ class Tree extends Component {
         self.setState({ dataArray: dataArray });
         localStorage.setItem('dataArray', JSON.stringify(dataArray));
     }
+    removeNode(name){
+        console.log(name);
+    }
     render() {
         let self = this;
         let structuredTree = getTree(this.state.dataArray);
@@ -39,21 +43,25 @@ class Tree extends Component {
 
         let getChildNodes = (item) => {
             // console.log(item.childs);
-            let childNodes = null;
-            if(item.childs.length > 0){
+            let childNodes = "";
+            if (item.childs.length > 0) {
                 // console.log('gg');
                 let childs = item.childs;
-                childs.map((v)=>{
+                childNodes = childs.map((v,k) => {
                     // console.log(v);
-                    childNodes = getChildNodes(v);
+                    return (
+                        <div key={k}>
+                            {getChildNodes(v)}
+                        </div>
+                    );
                 })
             }
             return (
                 <div>
-                    <Node addNode={self.addNode} item={item}>
-                    {childNodes}
+                    <Node addNode={self.addNode} removeNode={self.removeNode} item={item} key={item.name}>
+                        {childNodes}
                     </Node>
-                    
+
                 </div>
             );
         }
