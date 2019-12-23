@@ -3,7 +3,7 @@ import Node from './Node.js';
 import getTree from '../algorithms/tree.js';
 
 class Tree extends Component {
-    totalNode = 5;
+    totalNode = 0;
     constructor(props) {
         super(props);
         this.addNode = this.addNode.bind(this);
@@ -34,14 +34,26 @@ class Tree extends Component {
         localStorage.setItem('dataArray', JSON.stringify(dataArray));
     }
     removeNode(name){
-        console.log(name);
+        // console.log(name);
+        this.totalNode--;
+        let dataArray = this.state.dataArray;
+        let newDataArray = dataArray.filter((v)=>{
+            if(v.name !== name && v.parent !== name){
+                return v;
+            }
+        })
+        // console.log(newDataArray);
+        this.setState({ dataArray: newDataArray });
+        localStorage.setItem('dataArray', JSON.stringify(newDataArray));
     }
     render() {
+        this.totalNode = 0;
         let self = this;
         let structuredTree = getTree(this.state.dataArray);
         console.log(structuredTree);
 
         let getChildNodes = (item) => {
+            this.totalNode++;
             // console.log(item.childs);
             let childNodes = "";
             if (item.childs.length > 0) {
@@ -78,8 +90,8 @@ class Tree extends Component {
         });
         return (
             <div className="tree">
-                <div className="icon main-icon">
-                    <i onClick={() => this.addNode('root')} className="fa fa-plus"></i>
+                <div className="icon">
+                    <i onClick={() => this.addNode('root')} className="fa fa-plus main-icon"></i>
                     {nodeList}
                 </div>
             </div>

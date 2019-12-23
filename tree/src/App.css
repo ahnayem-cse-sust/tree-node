@@ -1,9 +1,17 @@
 .main-icon{
-  font-size: 20px;
+  font-size: 30px;
+}
+.icon{
   cursor: pointer;
 }
 .node{
   position: relative;
   left: 3px;
   padding-left: 20px;
+  margin: 5px;
+}
+.text-item{
+  border: 1px solid black;
+  padding: 5px;
+  margin: 10px;
 }
